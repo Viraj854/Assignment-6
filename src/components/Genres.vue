@@ -32,6 +32,11 @@ onMounted(async () => {
                 <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie Poster"
                     class="movie-poster" />
                 <p class="movie-title">{{ movie.title }}</p>
+                <button
+                    @click="store.cart.set(route.params.id, { title: response.data.original_title, url: response.data.poster_path })"
+                    class="buy-button">
+                    Buy
+                </button>
             </div>
         </div>
     </div>
@@ -101,5 +106,22 @@ onMounted(async () => {
     font-weight: 600;
     background-color: #f7fafd;
     border-top: 2px solid #d0e7f9;
+}
+
+.buy-button {
+    display: inline-block;
+    font-size: 18px;
+    color: #4073ad;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #4073ad;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.buy-button:hover {
+    background-color: #4073ad;
+    color: #fff;
 }
 </style>

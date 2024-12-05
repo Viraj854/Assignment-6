@@ -1,6 +1,10 @@
 <script setup>
 import axios from "axios";
 import { useRoute } from "vue-router";
+import { useStore } from "../store";
+
+
+const store = useStore();
 
 const route = useRoute();
 const response = await axios.get(`https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${import.meta.env.VITE_TMDB_KEY}&append_to_response=videos`);
@@ -15,6 +19,11 @@ console.log(response.data);
         <p class="movie-origin_county">Origin Country: {{ response.data.origin_country }}</p>
         <img :src="`https://image.tmdb.org/t/p/w500${response.data.poster_path}`" alt="Movie Poster"
             class="movie-poster" />
+        <button
+            @click="store.cart.set(route.params.id, { title: response.data.original_title, url: response.data.poster_path })"
+            class="buy-button">
+            Buy
+        </button>
         <a class="movie-site" :href="response.data.homepage" target="_blank">Official Movie Site</a>
         <h2 class="trailers-title">Trailers</h2>
         <div class="trailers-container">
@@ -71,6 +80,7 @@ console.log(response.data);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.buy-button,
 .movie-site {
     display: inline-block;
     font-size: 18px;
@@ -83,6 +93,7 @@ console.log(response.data);
     transition: background-color 0.3s, color 0.3s;
 }
 
+.buy-button:hover,
 .movie-site:hover {
     background-color: #4073ad;
     color: #fff;
