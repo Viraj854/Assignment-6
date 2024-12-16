@@ -71,7 +71,7 @@ h1 {
 
 .welcome-message {
   margin-right: 20px;
-  font-size: 18px;
+  font-size: 30px;
   color: #305a8a;
 }
 </style>
