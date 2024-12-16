@@ -34,7 +34,10 @@ onMounted(async () => {
                 <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie Poster"
                     class="movie-poster" />
                 <p class="movie-title">{{ movie.title }}</p>
-                <button
+                <button v-if="store.cart.has(movie.id)" class="buy-button">
+                    Added
+                </button>
+                <button v-else
                     @click="store.cart.set(movie.id, { title: movie.title, url: movie.poster_path }); $event.stopPropagation()"
                     class="buy-button">
                     Buy
