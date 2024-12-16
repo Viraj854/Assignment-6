@@ -2,11 +2,13 @@
 import axios from "axios";
 import { ref, onMounted } from 'vue';
 import { useRouter } from "vue-router";
+import { useStore } from "../store";
 
 const props = defineProps(["genres"]);
 const router = useRouter();
 const selectedGenre = ref(28);
 const response = ref(null);
+const store = useStore();
 
 async function getMovieByGenre() {
     response.value = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&with_genres=${selectedGenre.value}`);
@@ -32,8 +34,7 @@ onMounted(async () => {
                 <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie Poster"
                     class="movie-poster" />
                 <p class="movie-title">{{ movie.title }}</p>
-                <button
-                    @click="store.cart.set(route.params.id, { title: response.data.original_title, url: response.data.poster_path })"
+                <button @click="store.cart.set(movie.id, { title: movie.title, url: movie.poster_path })"
                     class="buy-button">
                     Buy
                 </button>

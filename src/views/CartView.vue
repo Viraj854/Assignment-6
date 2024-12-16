@@ -6,47 +6,86 @@ const store = useStore();
 
 <template>
     <div class="cart">
-        <h1>Shopping Cart</h1>
-        <div class="item" v-for="([key, value]) in store.cart">
+        <h2>Your Shopping Cart</h2>
+        <div class="item" v-for="([key, value]) in store.cart" :key="key">
             <img :src="`https://image.tmdb.org/t/p/w500${value.url}`" />
-            <h1>{{ value.title }}</h1>
-            <button @click="store.cart.delete(key)">Remove</button>
+            <div class="item-details">
+                <h3>{{ value.title }}</h3>
+                <button @click="store.cart.delete(key)">Remove</button>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-h1 {
-    color: #e50914;
-    text-align: center;
-}
-
-button {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 10px 15px;
-    background-color: #e50914;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
 .cart {
     display: flex;
     flex-direction: column;
-    background-color: #141414;
-    gap: 2rem;
-    height: 100vw;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #333333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .item {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 600px;
 }
 
-img {
-    width: 10%;
-    border-radius: 5%;
+.item:hover {
+    transform: scale(1.02);
+}
+
+.item img {
+    width: 120px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-details h3 {
+    color: #444444;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4073ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #4073ad;
+    transform: scale(1.05);
 }
 </style>
