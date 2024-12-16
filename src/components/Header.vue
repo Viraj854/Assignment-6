@@ -1,11 +1,25 @@
 <script setup>
+import { useStore } from '../store'; 
+import { RouterLink } from 'vue-router'; 
 
+const store = useStore(); 
 </script>
 
 <template>
   <div class="header-buttons">
-    <RouterLink to="/register" class="button register">Register</RouterLink>
-    <RouterLink to="/login" class="button login">Login</RouterLink>
+
+    <div v-if="!store.email">
+      <RouterLink to="/register" class="button register">Register</RouterLink>
+      <RouterLink to="/login" class="button login">Login</RouterLink>
+    </div>
+    
+    <div v-if="store.email">
+      <p class="welcome-message">Hello {{ store.firstName }}!</p>
+      <RouterLink to="/cart" class="button cart">Cart</RouterLink>
+      <RouterLink to="/settings" class="button settings">Settings</RouterLink>
+      <RouterLink to="/" class="button settings">Logout</RouterLink>
+    </div>
+
     <h1>VFlix</h1>
   </div>
 </template>
@@ -45,5 +59,11 @@ h1 {
 
 .header-buttons .button:hover {
   background-color: #305a8a;
+}
+
+.welcome-message {
+  margin-right: 20px;
+  font-size: 18px;
+  color: #305a8a;
 }
 </style>
