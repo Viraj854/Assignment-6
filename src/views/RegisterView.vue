@@ -23,7 +23,6 @@ const handleRegister = () => {
         alert('Passwords do not match!');
     
     }
-    console.log(store.firstName, store.lastName, store.email, store.password);
 };
 
 </script>
