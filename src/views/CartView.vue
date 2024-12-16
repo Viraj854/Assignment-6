@@ -1,10 +1,12 @@
 <script setup>
+import Header from '../components/Header.vue';
 import { useStore } from '../store';
 
 const store = useStore();
 </script>
 
 <template>
+    <Header />
     <div class="cart">
         <h2>Your Shopping Cart</h2>
         <div class="item" v-for="([key, value]) in store.cart" :key="key">

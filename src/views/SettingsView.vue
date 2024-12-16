@@ -1,10 +1,12 @@
 <script setup>
+import Header from '../components/Header.vue';
 import { useStore } from '../store';
 
 const store = useStore(); 
 </script>
 
 <template>
+    <Header />
     <div class="settings-container">
         <h2>Settings</h2>
         <p>
