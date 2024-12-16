@@ -1,8 +1,16 @@
 <script setup>
-import { useStore } from '../store'; 
-import { RouterLink } from 'vue-router'; 
+import { useStore } from '../store';
+import { RouterLink, useRouter } from 'vue-router';
 
-const store = useStore(); 
+const store = useStore();
+const router = useRouter();
+
+function logoutAndSignOut(event) {
+  event.preventDefault();
+  router.push('/').then(() => {
+    window.location.reload();
+  });
+}
 </script>
 
 <template>
@@ -12,12 +20,12 @@ const store = useStore();
       <RouterLink to="/register" class="button register">Register</RouterLink>
       <RouterLink to="/login" class="button login">Login</RouterLink>
     </div>
-    
+
     <div v-if="store.email">
       <p class="welcome-message">Hello {{ store.firstName }}!</p>
       <RouterLink to="/cart" class="button cart">Cart</RouterLink>
       <RouterLink to="/settings" class="button settings">Settings</RouterLink>
-      <RouterLink to="/" class="button settings">Logout</RouterLink>
+      <RouterLink to="/" class="button settings" @click="logoutAndSignOut">Logout</RouterLink>
     </div>
 
     <h1>VFlix</h1>
