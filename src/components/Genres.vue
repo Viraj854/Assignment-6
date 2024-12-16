@@ -118,7 +118,7 @@ onMounted(async () => {
     margin-top: 20px;
     padding: 10px 20px;
     border-radius: 5px;
-    border: 2px solid #4073ad;
+    border: 5px solid #4073ad;
     transition: background-color 0.3s, color 0.3s;
     width: 100%;
 }
