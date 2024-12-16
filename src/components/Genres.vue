@@ -34,7 +34,8 @@ onMounted(async () => {
                 <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie Poster"
                     class="movie-poster" />
                 <p class="movie-title">{{ movie.title }}</p>
-                <button @click="store.cart.set(movie.id, { title: movie.title, url: movie.poster_path })"
+                <button
+                    @click="store.cart.set(movie.id, { title: movie.title, url: movie.poster_path }); $event.stopPropagation()"
                     class="buy-button">
                     Buy
                 </button>
@@ -119,6 +120,7 @@ onMounted(async () => {
     border-radius: 5px;
     border: 2px solid #4073ad;
     transition: background-color 0.3s, color 0.3s;
+    width: 100%;
 }
 
 .buy-button:hover {
